@@ -1,0 +1,48 @@
+# Elytra HUD
+
+A vanilla Minecraft Java data pack. While you glide with an elytra, the actionbar shows:
+
+```
+Speed 32.4 b/s   Y 187   ▼ 3.2 b/s
+```
+
+- **Speed**: total speed in blocks per second, one decimal
+- **Y**: your altitude
+- **▲ / ▼**: climb (green) or sink (red) rate in blocks per second
+
+No mods, no resource pack. Works in singleplayer and on servers, for every player separately.
+
+## Requirements
+
+Minecraft Java Edition **26.3** (data pack format 121).
+
+## Install
+
+1. Download `elytra-hud.zip` from the [latest release](https://github.com/christoph-teichmeister/elytra-hud/releases/latest).
+2. Put the zip (do not unpack it) into your world's `datapacks` folder:
+   - Singleplayer: *Edit world → Open world folder → datapacks*, or pick it under *Data Packs* when creating a world.
+   - Server: `world/datapacks/`.
+3. Run `/reload` (or rejoin the world). `/datapack list` should show `file/elytra-hud.zip`.
+
+## Use
+
+- Just glide. The HUD appears on its own and disappears when you land.
+- `/trigger elytra_hud` turns it off or on again for yourself (no operator rights needed).
+
+## Uninstall
+
+Run `/function elytra_hud:uninstall` (removes its scoreboards), then `/datapack disable "file/elytra-hud.zip"` and delete the zip.
+
+## How it works
+
+Every tick, players with the `is_fall_flying` flag get their position read in milliblocks. The difference to the previous tick gives the velocity; speed is the length of that vector (integer square root via Newton's method on scoreboards), climb rate is the Y part. Teleports (more than 10 blocks in one tick) are skipped. Players who are not gliding cost one predicate check per tick.
+
+Known limit: scoreboard values are 32-bit, so beyond about 2.1 million blocks from 0,0 the HUD stops working.
+
+## Testing status
+
+Tested on a headless 26.3 server: the pack loads without errors, `/reload` is clean, all functions run, and the speed and climb math was checked with entities moved by known distances. The actionbar itself was not yet watched in a real client while gliding.
+
+## License
+
+MIT
