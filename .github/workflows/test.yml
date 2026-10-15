@@ -19,5 +19,5 @@ jobs:
         with:
           distribution: temurin
           java-version: "25"
-      - run: zip -r elytra-hud.zip pack.mcmeta data overlay_* LICENSE README.md
+      - run: zip -r elytra-hud.zip pack.mcmeta pack.png data overlay_* LICENSE README.md
       - run: .github/scripts/server-test.sh "${{ matrix.minecraft }}" elytra-hud.zip
