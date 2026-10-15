@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: "Version without v (e.g. 1.2.0); empty = bump patch"
+        description: "Version without v (e.g. 1.2.0); empty = from the commit type"
         required: false
 
 permissions:
@@ -29,8 +29,7 @@ jobs:
             next="v$INPUT"
           else
             last=$(git tag -l 'v*' --sort=-v:refname | head -n1)
-            IFS=. read -r major minor patch <<< "${last#v}"
-            next="v${major:-0}.${minor:-0}.$(( ${patch:-0} + 1 ))"
+            next=$(.github/scripts/next-version.sh "$last" "$(git log -1 --format=%B)")
           fi
           echo "tag=$next" >> "$GITHUB_OUTPUT"
 
