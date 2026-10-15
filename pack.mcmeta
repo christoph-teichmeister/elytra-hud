@@ -1,7 +1,12 @@
 {
   "pack": {
     "description": "Elytra flight HUD: speed, altitude and climb rate in the actionbar",
-    "min_format": 121,
+    "min_format": 101,
     "max_format": 121
+  },
+  "overlays": {
+    "entries": [
+      { "min_format": 121, "max_format": 121, "directory": "overlay_121" }
+    ]
   }
 }
