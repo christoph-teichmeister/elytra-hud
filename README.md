@@ -14,6 +14,8 @@ Speed 32.4 b/s   Y 187   ▼ 3.2 b/s
 
 No mods, no resource pack. Works in singleplayer and on servers, for every player separately.
 
+![Diving at 43.7 b/s: the actionbar shows speed, height and a red ▼ sink rate](art/screenshots/1-dive.jpg)
+
 ## Requirements
 
 Minecraft Java Edition **26.1 to 26.3** (data pack formats 101 to 121).
