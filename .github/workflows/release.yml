@@ -1,0 +1,43 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version without v (e.g. 1.2.0); empty = bump patch"
+        required: false
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Next version
+        id: v
+        env:
+          INPUT: ${{ inputs.version }}
+        run: |
+          if [ -n "$INPUT" ]; then
+            next="v$INPUT"
+          else
+            last=$(git tag -l 'v*' --sort=-v:refname | head -n1)
+            IFS=. read -r major minor patch <<< "${last#v}"
+            next="v${major:-0}.${minor:-0}.$(( ${patch:-0} + 1 ))"
+          fi
+          echo "tag=$next" >> "$GITHUB_OUTPUT"
+
+      - name: Build zip
+        run: zip -r elytra-hud.zip pack.mcmeta data overlay_* LICENSE README.md
+
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "${{ steps.v.outputs.tag }}" elytra-hud.zip --target "$GITHUB_SHA" --generate-notes
