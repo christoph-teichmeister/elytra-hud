@@ -3,6 +3,12 @@ name: Release
 on:
   push:
     branches: [main]
+    # Only changes to what the game loads make a release; README, CI and art do not.
+    paths:
+      - pack.mcmeta
+      - pack.png
+      - data/**
+      - overlay_*/**
   workflow_dispatch:
     inputs:
       version:
