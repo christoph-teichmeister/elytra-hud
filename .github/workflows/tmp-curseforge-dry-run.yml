@@ -1,0 +1,13 @@
+name: tmp curseforge dry run
+on:
+  push:
+    branches: [curseforge-upload]
+jobs:
+  dry:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: echo "dry run" > changelog.md
+      - run: DRY_RUN=1 .github/scripts/curseforge-upload.sh none "Elytra HUD test" changelog.md
+        env:
+          CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
