@@ -34,7 +34,7 @@ jobs:
           echo "tag=$next" >> "$GITHUB_OUTPUT"
 
       - name: Build zip
-        run: zip -r elytra-hud.zip pack.mcmeta data overlay_* LICENSE README.md
+        run: zip -r elytra-hud.zip pack.mcmeta pack.png data overlay_* LICENSE README.md
 
       - name: Create release
         env:
