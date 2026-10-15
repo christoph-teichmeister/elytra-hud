@@ -1,6 +1,6 @@
 # Elytra HUD
 
-<img src="pack.png" alt="Elytra HUD logo" width="128">
+<p align="center"><img src="pack.png" alt="Elytra HUD logo" width="128"></p>
 
 A vanilla Minecraft Java data pack. While you glide with an elytra, the actionbar shows:
 
