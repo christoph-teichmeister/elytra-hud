@@ -47,7 +47,7 @@ Known limit: scoreboard values are 32-bit, so beyond about 2.1 million blocks fr
 
 ## Testing status
 
-Tested on headless 26.1, 26.1.2, 26.2 and 26.3 servers: the pack loads without errors, `/reload` is clean, all functions run, and the speed and climb math was checked with entities moved by known distances. The actionbar itself was not yet watched in a real client while gliding.
+Every pull request loads the pack on headless 26.1, 26.1.1, 26.1.2, 26.2 and 26.3 servers and fails on any data pack error. The speed and climb math was checked with entities moved by known distances, and the HUD was played in a 26.1.2 client (see the screenshots in `art/screenshots/`).
 
 ## License
 
