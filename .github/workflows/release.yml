@@ -46,3 +46,12 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh release create "${{ steps.v.outputs.tag }}" elytra-hud.zip --target "$GITHUB_SHA" --generate-notes
+
+      - name: Upload to CurseForge
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
+          TAG: ${{ steps.v.outputs.tag }}
+        run: |
+          gh release view "$TAG" --json body -q .body > changelog.md
+          .github/scripts/curseforge-upload.sh elytra-hud.zip "Elytra HUD ${TAG#v}" changelog.md
