@@ -40,12 +40,17 @@ jobs:
           echo "tag=$next" >> "$GITHUB_OUTPUT"
 
       - name: Build zip
-        run: zip -r elytra-hud.zip pack.mcmeta pack.png data overlay_* LICENSE README.md
+        id: zip
+        env:
+          TAG: ${{ steps.v.outputs.tag }}
+        run: |
+          zip -r "elytra-hud-${TAG#v}.zip" pack.mcmeta pack.png data overlay_* LICENSE README.md
+          echo "file=elytra-hud-${TAG#v}.zip" >> "$GITHUB_OUTPUT"
 
       - name: Create release
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create "${{ steps.v.outputs.tag }}" elytra-hud.zip --target "$GITHUB_SHA" --generate-notes
+        run: gh release create "${{ steps.v.outputs.tag }}" "${{ steps.zip.outputs.file }}" --target "$GITHUB_SHA" --generate-notes
 
       - name: Upload to CurseForge
         env:
@@ -54,4 +59,4 @@ jobs:
           TAG: ${{ steps.v.outputs.tag }}
         run: |
           gh release view "$TAG" --json body -q .body > changelog.md
-          .github/scripts/curseforge-upload.sh elytra-hud.zip "Elytra HUD ${TAG#v}" changelog.md
+          .github/scripts/curseforge-upload.sh "${{ steps.zip.outputs.file }}" "Elytra HUD ${TAG#v}" changelog.md

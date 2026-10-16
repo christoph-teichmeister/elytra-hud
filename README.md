@@ -22,11 +22,12 @@ Minecraft Java Edition **26.1 to 26.3** (data pack formats 101 to 121).
 
 ## Install
 
-1. Download `elytra-hud.zip` from the [latest release](https://github.com/christoph-teichmeister/elytra-hud/releases/latest).
+1. Download `elytra-hud-<version>.zip` from the [latest release](https://github.com/christoph-teichmeister/elytra-hud/releases/latest).
 2. Put the zip (do not unpack it) into your world's `datapacks` folder:
    - Singleplayer: *Edit world → Open world folder → datapacks*, or pick it under *Data Packs* when creating a world.
    - Server: `world/datapacks/`.
-3. Run `/reload` (or rejoin the world). `/datapack list` should show `file/elytra-hud.zip`.
+   - CurseForge app: it shows *"This profile's Data packs need to be loaded manually"* because vanilla Minecraft only loads data packs per world. That is expected: download the zip and put it into the world's `datapacks` folder as above.
+3. Run `/reload` (or rejoin the world). `/datapack list` should show `file/elytra-hud-<version>.zip`.
 
 ## Use
 
@@ -35,7 +36,7 @@ Minecraft Java Edition **26.1 to 26.3** (data pack formats 101 to 121).
 
 ## Uninstall
 
-Run `/function elytra_hud:uninstall` (removes its scoreboards), then `/datapack disable "file/elytra-hud.zip"` and delete the zip.
+Run `/function elytra_hud:uninstall` (removes its scoreboards), then `/datapack disable "file/elytra-hud-<version>.zip"` and delete the zip.
 
 ## How it works
 
