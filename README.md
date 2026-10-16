@@ -26,6 +26,7 @@ Minecraft Java Edition **26.1 to 26.3** (data pack formats 101 to 121).
 2. Put the zip (do not unpack it) into your world's `datapacks` folder:
    - Singleplayer: *Edit world → Open world folder → datapacks*, or pick it under *Data Packs* when creating a world.
    - Server: `world/datapacks/`.
+   - CurseForge app: it shows *"This profile's Data packs need to be loaded manually"* because vanilla Minecraft only loads data packs per world. That is expected: download the zip and put it into the world's `datapacks` folder as above.
 3. Run `/reload` (or rejoin the world). `/datapack list` should show `file/elytra-hud.zip`.
 
 ## Use
